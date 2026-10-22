@@ -1,0 +1,10 @@
+node_modules
+preview/
+artifacts/
+*.tgz
+*.zip
+.DS_Store
+.env
+.env.*
+data/
+*.log

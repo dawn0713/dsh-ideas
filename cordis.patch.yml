@@ -1,0 +1,12 @@
+- insert:
+    - id: personal-ideas
+      name: "@personal-ai/ideas-dsh-plugin"
+      config:
+        # 模型和密钥由 DSH 已有的模型服务提供，不在插件中另存密钥。
+        memoryBackend: "meow"
+        remeEndpoint: "http://127.0.0.1:3457"
+        timezone: "Asia/Shanghai"
+        # 自动推荐以十二小时为最短间隔，每轮最多生成三条。
+        autoIntervalMs: 43200000
+        refreshAfterMs: 43200000
+        count: 3

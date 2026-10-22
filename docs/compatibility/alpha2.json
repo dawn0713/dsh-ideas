@@ -1,0 +1,15 @@
+{
+  "dsh": "0.2.1-alpha.2",
+  "officialCliInstallation": true,
+  "compatibilityAccepted": true,
+  "dumpConfig": true,
+  "webBoot": true,
+  "goalsReadWrite": true,
+  "ideasCompletionSync": "synced",
+  "completedTasks": 1,
+  "remainingTasks": 1,
+  "goalStatus": "active",
+  "noRepeatWrite": true,
+  "layoutAndSyncClientIncluded": true,
+  "noVersionExemption": true
+}
