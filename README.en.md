@@ -41,7 +41,7 @@ You can also pass the path to a downloaded tgz. No unpacking or compilation is r
 
 **Meow** supplies personal memory. If memory is unavailable, Ideas shows a notice and can still use an available Goals source or general-purpose ideas.
 
-**Goals** supplies persistent goals and steps. Completion feedback requires a Goals plugin exposing the `personalGoals` service with `get` and `updateTask`; integration has been verified against the Goals 0.2.0 functionality. Meow, Goals, and the DSH host are not bundled in this repository.
+**[Goals](https://github.com/dawn0713/dsh-goals)** supplies persistent goals and steps. Completion feedback requires a Goals plugin exposing the `personalGoals` service with `get` and `updateTask`; integration has been verified against the Goals 0.2.0 functionality. Meow, Goals, and the DSH host are not bundled in this repository.
 
 ## Goals feedback
 

@@ -51,7 +51,7 @@ dsh plugin --profile web add "/path/to/dsh-ideas.tgz"
 ### 可选配套插件
 
 - **Meow**：提供个人记忆。默认 bundle 使用 `meowMemory` 服务；缺少记忆来源时会显示提示，仍可使用可用的 Goals 来源与通用点子。
-- **Goals**：提供跨会话目标与步骤。要使用完成回写，需要安装提供 `personalGoals` 服务及 `get` / `updateTask` 方法的 Goals 插件；已验证与 Goals 0.2.0 功能版本联动。
+- **[Goals](https://github.com/dawn0713/dsh-goals)**：提供跨会话目标与步骤。要使用完成回写，需要安装提供 `personalGoals` 服务及 `get` / `updateTask` 方法的 Goals 插件；已验证与 Goals 0.2.0 功能版本联动。
 
 本仓库发布的是 Ideas 插件，未打包 Meow、Goals 或 DSH 宿主。两个 DSH 版本使用同一个 Ideas tgz，无需切换安装包。
 
