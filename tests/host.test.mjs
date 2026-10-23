@@ -5,6 +5,7 @@ import { Context } from "@deepseek-ai/cordis";
 import LlmRuntime, { LlmAdapter } from "@deepseek-ai/dsh-llm";
 import Registry from "@deepseek-ai/dsh-typert-registry";
 import Gateway from "@deepseek-ai/dsh-api-gateway";
+import RemoteAccess from "@deepseek-ai/dsh-api-remote-access";
 import * as plugin from "../dist/index.js";
 import { createIdeasApi } from "../dist/client/api.js";
 import { draft, fixture } from "./helpers.mjs";
@@ -15,7 +16,7 @@ test("真实 DSH Gateway 串起前端 RPC、模型流、原生 prompt 请求和�
   const calls = [];
   const prompts = [];
   t.after(() => ctx.fiber.dispose());
-  for (const service of [Registry, Gateway, LlmRuntime]) await ctx.plugin(service);
+  for (const service of [Registry, RemoteAccess, Gateway, LlmRuntime]) await ctx.plugin(service);
   class Adapter extends LlmAdapter {
     async *stream(options) {
       calls.push(options);
@@ -27,10 +28,13 @@ test("真实 DSH Gateway 串起前端 RPC、模型流、原生 prompt 请求和�
   ctx.provide("agentDefaultModel", { currentSelection: () => ({ provider: "bailian", model: "existing-model" }) });
   ctx.provide("sessionController", { async prompt(request) { prompts.push(request); return { accepted: true }; } });
   const fiber = await ctx.plugin(plugin, f.config);
+  // rc.2 的 Gateway 要求显式声明进程内调用者；测试以宿主本地用户身份访问真实服务。
+  const peer = { id: "ideas-host-test", ctx, principal: { kind: "owner" },
+    signal: new AbortController().signal, interactions: "none", dispose: async () => {} };
   const api = createIdeasApi({ async call(channel, endpoint, payload, signal) {
     assert.equal(channel, "/api");
     const [namespace, method] = endpoint.split("/");
-    try { return { ok: true, value: await ctx.typertGateway.invoke({ namespace, method, args: payload.args, signal }) }; }
+    try { return { ok: true, value: await ctx.typertGateway.invoke({ namespace, method, args: payload.args, signal, peer }) }; }
     catch (error) { return { ok: false, error: { code: error.code ?? "error", message: error.message } }; }
   } });
   t.after(() => api.dispose());

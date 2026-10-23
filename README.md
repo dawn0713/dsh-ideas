@@ -23,7 +23,7 @@ Ideas 是一个 DeepSeek Harness（DSH）插件。它把个人记忆、Goals 中
 
 ## 安装
 
-前提：已安装 **DSH 0.2.1-alpha.1 或 0.2.1-alpha.2 的 Web 版**，并配置好可用的默认模型。Node.js 需要 `^22.19.0` 或 `>=24.0.0`。
+前提：已安装 **DSH 0.2.1-alpha.1、0.2.1-alpha.2 或 0.2.1-rc.2 的 Web 版**，并配置好可用的默认模型。Node.js 需要 `^22.19.0` 或 `>=24.0.0`。
 
 1. 打开 DSH 左侧的 **插件 → 添加插件**。
 2. 粘贴下面的地址并安装：
@@ -53,7 +53,7 @@ dsh plugin --profile web add "/path/to/dsh-ideas.tgz"
 - **Meow**：提供个人记忆。默认 bundle 使用 `meowMemory` 服务；缺少记忆来源时会显示提示，仍可使用可用的 Goals 来源与通用点子。
 - **[Goals](https://github.com/dawn0713/dsh-goals)**：提供跨会话目标与步骤。要使用完成回写，需要安装提供 `personalGoals` 服务及 `get` / `updateTask` 方法的 Goals 插件；已验证与 Goals 0.2.0 功能版本联动。
 
-本仓库发布的是 Ideas 插件，未打包 Meow、Goals 或 DSH 宿主。两个 DSH 版本使用同一个 Ideas tgz，无需切换安装包。
+本仓库发布的是 Ideas 插件，未打包 Meow、Goals 或 DSH 宿主。三个 DSH 版本使用同一个 Ideas tgz，无需切换安装包。
 
 ## 怎么使用
 

@@ -4,7 +4,6 @@ import test from "node:test";
 import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
 import { readFile } from "node:fs/promises";
-import { transform } from "esbuild";
 import { Context } from "@deepseek-ai/cordis";
 import LlmRuntime, { LlmAdapter, createUserMessage } from "@deepseek-ai/dsh-llm";
 import AgentRegistry from "@deepseek-ai/dsh-agent";
@@ -20,10 +19,11 @@ import { draft, fixture, signal } from "./helpers.mjs";
 
 const require = createRequire(import.meta.url);
 const chatDir = dirname(require.resolve("@deepseek-ai/dsh-client-ui-chat/package.json"));
-// 宿主浏览器代码只发布 bundle；直接编译其纯可见性函数用于验证，不构建或修改宿主。
-const visibilitySource = await readFile(join(chatDir, "src/client/contract/chat-visibility.ts"), "utf8");
-const visibility = await transform(visibilitySource, { loader: "ts", format: "esm" });
-const { isVisibleChatNode } = await import(`data:text/javascript;base64,${Buffer.from(visibility.code).toString("base64")}`);
+// rc.2 npm 只发布浏览器 bundle；提取其中真正的纯可见性函数，避免依赖上游私有源码路径。
+const chatBundle = await readFile(join(chatDir, "lib/client.js"), "utf8");
+const visibilityFunction = chatBundle.match(/function isVisibleChatNode\(node\) \{[\s\S]*?\n\t\t\}/)?.[0];
+assert.ok(visibilityFunction, "宿主 bundle 应包含聊天可见性函数");
+const { isVisibleChatNode } = await import(`data:text/javascript;base64,${Buffer.from(`export ${visibilityFunction}`).toString("base64")}`);
 
 for (const general of [false, true]) test(`${general ? "通用点子" : "个性化推荐"}：原生 Agent 收到资料，正文只保留开场且会话隔离`, async t => {
   const f = await fixture(t);

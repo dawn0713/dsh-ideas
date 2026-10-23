@@ -19,7 +19,7 @@ The screenshot is a development preview using sample data.
 
 ## Install
 
-Requires **DSH 0.2.1-alpha.1 or 0.2.1-alpha.2 Web**, a working default model, and Node.js `^22.19.0` or `>=24.0.0`.
+Requires **DSH 0.2.1-alpha.1, 0.2.1-alpha.2, or 0.2.1-rc.2 Web**, a working default model, and Node.js `^22.19.0` or `>=24.0.0`.
 
 In DSH, open **Plugins → Add plugin** and paste:
 
