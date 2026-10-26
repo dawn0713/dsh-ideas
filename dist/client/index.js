@@ -1,4 +1,4 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { jsx as _jsx } from "react/jsx-runtime";
 import { useSyncExternalStore } from "react";
 import { createIdeasApi } from "./api.js";
 import { en, zh } from "./locales.js";
@@ -40,8 +40,7 @@ export function apply(ctx) {
         locale: NS, label: () => t("title") }, Bulb));
     ctx.slots.inject("sidebar.right.pane.tab", () => ctx.slots.register({ name: "sidebar.right.pane.tab", key: TAB,
         locale: NS, inject: injected }, SidebarPage));
-    ctx.slots.inject("conversation.session.header.utilities", () => ctx.slots.register({ name: "conversation.session.header.utilities",
-        id: "personal-ideas", order: -4, locale: NS, inject: () => ({ open: () => { ctx.sidebarRight.openTab("ideas"); } }) }, ({ open, t }) => _jsxs("button", { type: "button", className: "pai-ideas-entry", onClick: open, title: t("open"), "aria-label": t("open"), children: [_jsx(Bulb, { size: 18 }), _jsx("span", { children: t("title") })] })));
+    // Ideas 只通过侧边栏进入，不再向聊天右上角注册快捷按钮。
     ctx.on("connection/reset", () => { void api.refresh(); });
 }
 /** 独立页面订阅 DSH 正式的当前会话源；打开 Ideas 本身不改变会话选择。 */

@@ -1688,31 +1688,6 @@ function apply(ctx) {
     locale: NS,
     inject: injected
   }, SidebarPage));
-  ctx.slots.inject("conversation.session.header.utilities", () => ctx.slots.register(
-    {
-      name: "conversation.session.header.utilities",
-      id: "personal-ideas",
-      order: -4,
-      locale: NS,
-      inject: () => ({ open: () => {
-        ctx.sidebarRight.openTab("ideas");
-      } })
-    },
-    ({ open, t: t2 }) => /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
-      "button",
-      {
-        type: "button",
-        className: "pai-ideas-entry",
-        onClick: open,
-        title: t2("open"),
-        "aria-label": t2("open"),
-        children: [
-          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Bulb, { size: 18 }),
-          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: t2("title") })
-        ]
-      }
-    )
-  ));
   ctx.on("connection/reset", () => {
     void api.refresh();
   });

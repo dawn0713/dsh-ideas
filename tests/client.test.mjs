@@ -1,4 +1,4 @@
-// 用真正的 DSH SlotCore 和 React DOM 验证双入口、当前会话绑定以及用户操作。
+// 用真正的 DSH SlotCore 和 React DOM 验证侧边栏入口、当前会话绑定以及用户操作。
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
@@ -84,7 +84,8 @@ test("真实槽注册、独立页面和右侧栏渲染、采纳、发送与完�
   assert.equal(tabs[0].kind, "ideas");
   const main = registrations.find(row => row.options.name === "main");
   const side = registrations.find(row => row.options.name === "sidebar.right.pane.tab");
-  const header = registrations.find(row => row.options.name === "conversation.session.header.utilities");
+  // 保留侧边栏入口，同时确认真实聊天头部没有 Ideas 按钮注册。
+  assert.equal(core.entries("conversation.session.header.utilities").length, 0);
   root = createRoot(document.getElementById("root"));
   const props = { ...main.options.inject(), t: key => zh[key], useSessions: select => select({ byId: {
     "session-a": { displayTitle: "会话 A" }, "session-b": { displayTitle: "会话 B" },
@@ -125,9 +126,6 @@ test("真实槽注册、独立页面和右侧栏渲染、采纳、发送与完�
   assert.match(document.body.textContent, /你选择了 Ideas/);
   assert.match(document.body.textContent, /建议标题/);
   assert.doesNotMatch(document.body.textContent, /验收清单|evidence|instruction/);
-  await act(async () => { root.render(React.createElement(header.component, { ...header.options.inject(), t: props.t })); });
-  await act(async () => { document.querySelector("button").click(); });
-  assert.equal(opened.at(-1), "ideas");
   // 在真实浏览器组件中验证：前三张卡不能因记忆更新或分数更高而挤掉目标来源。
   mixedIdeas = Array.from({ length: 4 }, (_, n) => ({ ...createIdea({ ...draft, title: `来源测试${n}` },
     { query: "test", provider: "bailian", model: "test" }, ["事实依据"]), basis: n === 3 ? "goal" : "memory",

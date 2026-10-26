@@ -1,6 +1,6 @@
 {
   "name": "@personal-ai/ideas-dsh-plugin",
-  "version": "0.4.10-dsh.0.2.1",
+  "version": "0.4.11-dsh.0.2.1",
   "description": "Ideas 个性化建议与 Goals 步骤完成反馈；支持 DSH 0.2.1-alpha.1 / alpha.2 / rc.2 Web",
   "type": "module",
   "main": "./dist/index.js",

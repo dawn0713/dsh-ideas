@@ -27,7 +27,7 @@ In DSH, open **Plugins → Add plugin** and paste:
 https://github.com/dawn0713/dsh-ideas/releases/latest/download/dsh-ideas.tgz
 ```
 
-Enable the plugin, restart `dsh web`, and refresh the page. The same tgz supports both DSH versions.
+Enable the plugin, restart `dsh web`, and refresh the page. The same tgz supports all three DSH versions. Version 0.4.11 removes the chat-header shortcut and keeps the sidebar entries.
 
 CLI installation is also supported:
 
@@ -48,6 +48,12 @@ You can also pass the path to a downloaded tgz. No unpacking or compilation is r
 Ideas stores the actual goal and task identifiers when generating a linked recommendation. Verified or explicitly confirmed completion marks that step as done through the Goals service.
 
 Feedback is persisted before delivery. Failures remain visible and can be retried without executing the task again. Completed steps are not rewritten, and missing or cancelled steps produce an error. Unlinked ideas and historical completions from older versions are not automatically written back. Completing one step does not complete the entire goal.
+
+## No recommendations after a fresh install
+
+Automatic generation first runs about 60 seconds after the plugin starts. Opening or refreshing the page only loads saved cards. Personalized recommendations need a working model and evidence from Meow memory or unfinished Goals steps; recent conversation alone is insufficient. General-purpose ideas remain available without either source.
+
+Automatic attempts are at least 12 hours apart; failures back off up to 24 hours. The saved `_engine.md` state survives restart and reinstall. To try immediately, expand **Custom generation** and click **Generate Ideas**. This retrieves evidence, calls the model, and shows specific failures; **Refresh** does not generate cards.
 
 ## Data and models
 

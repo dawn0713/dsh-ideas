@@ -11,7 +11,7 @@ mkdir -p artifacts
 npm pack --pack-destination artifacts
 ```
 
-将输出的版本化 tgz 复制为 `artifacts/dsh-ideas.tgz`。本次版本为 `personal-ai-ideas-dsh-plugin-0.4.10-dsh.0.2.1.tgz`。
+将输出的版本化 tgz 复制为 `artifacts/dsh-ideas.tgz`。本次版本为 `personal-ai-ideas-dsh-plugin-0.4.11-dsh.0.2.1.tgz`。
 
 ## 首次发布
 
@@ -19,7 +19,7 @@ npm pack --pack-destination artifacts
 
 ```sh
 gh repo create dawn0713/dsh-ideas --public --source . --remote origin --push --description "Ideas for DeepSeek Harness: memory, goals, and action tracking"
-gh release create v0.4.10-dsh.0.2.1 artifacts/dsh-ideas.tgz artifacts/personal-ai-ideas-dsh-plugin-0.4.10-dsh.0.2.1.tgz --repo dawn0713/dsh-ideas --title "Ideas 0.4.10 · DSH alpha.1 / alpha.2 / rc.2" --notes-file RELEASE_NOTES.md --latest
+gh release create v0.4.11-dsh.0.2.1 artifacts/dsh-ideas.tgz artifacts/personal-ai-ideas-dsh-plugin-0.4.11-dsh.0.2.1.tgz --repo dawn0713/dsh-ideas --title "Ideas 0.4.11 · DSH alpha.1 / alpha.2 / rc.2" --notes-file RELEASE_NOTES.md --latest
 ```
 
 ## 后续更新

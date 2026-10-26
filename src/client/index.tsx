@@ -1,4 +1,4 @@
-/** 使用 DSH 正式 slot 扩展点贡献全页、左侧入口、右侧页签和会话快捷入口。 */
+/** 使用 DSH 正式 slot 扩展点贡献全页、左侧入口和右侧页签。 */
 import type { Context } from "@deepseek-ai/cordis";
 import type {} from "@deepseek-ai/dsh-client-connection/client";
 import type {} from "@deepseek-ai/dsh-client-locale/client";
@@ -59,10 +59,7 @@ export function apply(ctx: Context): void {
     locale: NS, label: () => t("title") }, Bulb));
   ctx.slots.inject("sidebar.right.pane.tab", () => ctx.slots.register({ name: "sidebar.right.pane.tab", key: TAB,
     locale: NS, inject: injected }, SidebarPage));
-  ctx.slots.inject("conversation.session.header.utilities", () => ctx.slots.register({ name: "conversation.session.header.utilities",
-    id: "personal-ideas", order: -4, locale: NS, inject: () => ({ open: () => { ctx.sidebarRight.openTab("ideas"); } }) },
-  ({ open, t }: { open: () => void; t: Translate }) => <button type="button" className="pai-ideas-entry" onClick={open}
-    title={t("open")} aria-label={t("open")}><Bulb size={18} /><span>{t("title")}</span></button>));
+  // Ideas 只通过侧边栏进入，不再向聊天右上角注册快捷按钮。
   ctx.on("connection/reset", () => { void api.refresh(); });
 }
 
